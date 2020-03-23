@@ -14,8 +14,10 @@ export class DataStorageService {
 
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
-    this.http.put('https://ascend-b711d.firebaseio.com/recipes.json', recipes)
-      .subscribe();
+    if(recipes.length) {
+      this.http.put('https://ascend-b711d.firebaseio.com/recipes.json', recipes)
+        .subscribe();
+    }  
   }
 
   fetchRecipes() {
