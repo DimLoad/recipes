@@ -4,6 +4,7 @@
     <hr>
     <ul class="list-group">
       <a style="cursor: pointer" class="list-group-item mb-1" 
+        [@ingredientTransition]
         *ngFor="let ingredient of ingredients; let i = index;"
         (click)="onEditItem(i)">
         {{ ingredient.name}} ({{ ingredient.amount }})
