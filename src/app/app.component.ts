@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth/auth.service';
+import { HttpClient } from '@angular/common/http';
+
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +9,13 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  posts: Post[] = [];
+
+  constructor(private http: HttpClient) {}
+
   ngOnInit() {
-    this.authService.autoLogin();
+    this.http
+      .get<Post[]>('https://jsonplaceholder.typicode.com/posts')
+      .subscribe(fetchedPosts => (this.posts = fetchedPosts));
   }
 }
